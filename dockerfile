@@ -16,6 +16,6 @@ COPY . /app/
 
 WORKDIR /app/sample_auto
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
