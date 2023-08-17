@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: myapp-dply
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: myapp
@@ -14,10 +15,6 @@ spec:
       containers:
       - name: myapp-container
         image: lakshminarayanam/gitops-argo-app:v1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
 
@@ -30,7 +27,9 @@ metadata:
 spec:
   selector:
     app: myapp
+  type: LoadBalancer
   ports:
-  - port: 80  
+  - protocol: TCP
+    port: 8080  
     targetPort: 8080
-    nodePort: 8080
+    nodePort: 31110

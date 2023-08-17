@@ -1,0 +1,17 @@
+{
+    "jenkins-runner.jobs": {
+        "jenkins_auto_pipeline": {
+            "isDefault": true,
+            "runWith": "jenkins-master",
+            "name": "jenkins_auto_pipeline"
+        }
+    },
+    "jenkins-runner.hostConfigs": {
+        "jenkins-master": {
+            "url": "http://localhost:8880",
+            "user": "LakshmiNarayana_M",
+            "password": "Lakshmina@321J!",
+            "useCrumbIssuer": true
+        }
+    }
+}
