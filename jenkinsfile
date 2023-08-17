@@ -21,18 +21,18 @@ pipeline{
             steps{
                 script{
                     git credentialsId: 'github',
-                    url: 'https://github.com/Lakshminarayana155/gitops_argocd.git',
+                    url: 'https://github.com/Lakshminarayana155/jenkins_automation',
                     branch: 'main'
                 }
             }
         }
-    //     stage("Build Docker Image"){
-    //         steps{
-    //             script{
-    //                 docker_image = docker.build "${IMAGE_NAME}"
-    //             }
-    //         }
-    //     }
+        stage("Build Docker Image"){
+            steps{
+                script{
+                    docker_image = docker.build "${IMAGE_NAME}"
+                }
+            }
+        }
     //     stage("Push Docker Image"){
     //         steps{
     //             script{
