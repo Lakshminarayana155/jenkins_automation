@@ -43,24 +43,24 @@ pipeline{
                 }
             }
         }
-        stage("Delete Docker Image"){
-            steps{
-                script{
-                    bat "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-                    bat "docker rmi ${IMAGE_NAME}:latest"
-                }
-            }
-        }
-        stage("Updating kubernetes deployment file"){
-            steps{
-                script{
-                    powershell """
-                    Get-Content deployment.yaml | ForEach-Object { $_ -replace '${APP_NAME}.*', '${APP_NAME}:${IMAGE_TAG}' } | Set-Content deployment.yaml
-                    Get-Content deployment.yaml
-                    """
-                }
-            }
-        }
+        // stage("Delete Docker Image"){
+        //     steps{
+        //         script{
+        //             bat "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+        //             bat "docker rmi ${IMAGE_NAME}:latest"
+        //         }
+        //     }
+        // }
+        // stage("Updating kubernetes deployment file"){
+        //     steps{
+        //          script{
+        //             powershell """
+        //             Get-Content deployment.yaml | ForEach-Object { $_ -replace '${APP_NAME}.*', ${APP_NAME}:${IMAGE_TAG}' } | Set-Content deployment.yaml
+        //             Get-Content deployment.yaml
+        //             """
+        //         }
+        //     }
+        // }
     //     stage("Push the changed deployment file to Git"){
     //         steps{
     //             script{
@@ -77,14 +77,22 @@ pipeline{
     //             }
     //         }
     //     }
-    //     stage("Dokcer images"){
-    //         steps{
-    //             script{
-    //                 sh "docker pull lakshminarayanam/gitops-argo-app:latest"
-    //                 sh "docker images"
+        // stage("Dokcer images"){
+        //     steps{
+        //         script{
+        //             sh "docker pull lakshminarayanam/gitops-argo-app:latest"
+        //             sh "docker images"
 
-    //             }
-    //         }
-    //     }
+        //         }
+        //     }
+        // }
+        stage("kubernetes deployment"){
+            steps{
+                script{
+                    bat "docker images"
+
+                }
+            }
+        }
     }
 }
