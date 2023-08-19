@@ -8,6 +8,7 @@ pipeline{
         IMAGE_NAME="${DOCKERHUB_USERNAME}"+"/"+"${APP_NAME}"
         REGISTRY_CREDS= "dockerhub"
         KUBE_CONFIG = credentials('k8scred')
+        KUBECONFIG = "${JENKINS_HOME}/.kube/config"
     }
 
     stages{
