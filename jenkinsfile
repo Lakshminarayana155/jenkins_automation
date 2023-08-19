@@ -105,21 +105,21 @@ pipeline{
         //         }
         //     }
         // }
-        stage("Deploy to Kubernetes"){
-            steps{
-                script{
-                    kubeDeploy(
-                        configs: 'k8scred', // Your Kubernetes configuration credentials
-                        kubeconfigContent: KUBE_CONFIG,
-                        manifests: [
-                            "${WORKSPACE}/deploymentService.yaml"
+        // stage("Deploy to Kubernetes"){
+        //     steps{
+        //         script{
+        //             kubeDeploy(
+        //                 configs: 'k8scred', // Your Kubernetes configuration credentials
+        //                 kubeconfigContent: KUBE_CONFIG,
+        //                 manifests: [
+        //                     "${WORKSPACE}/deploymentService.yaml"
                             
-                        ],
-                        enableConfigSubstitution: false
-                    )
-                }
-            }
-        }
+        //                 ],
+        //                 enableConfigSubstitution: false
+        //             )
+        //         }
+        //     }
+        // }
 
         // stage("Deploy to Kubernetes"){
         //     steps{
