@@ -7,6 +7,7 @@ pipeline{
         IMAGE_TAG="${BUILD_NUMBER}"
         IMAGE_NAME="${DOCKERHUB_USERNAME}"+"/"+"${APP_NAME}"
         REGISTRY_CREDS= "dockerhub"
+        KUBE_CONFIG = credentials('k8scred')
     }
 
     stages{
@@ -90,16 +91,31 @@ pipeline{
         //         }
         //     }
         // }
-        // stage("kubernetes deployment"){
+        // stage("Deploy to Kubernetes"){
         //     steps{
         //         script{
-        //             bat "docker images"
-        //             bat "kubectl apply -f deploymentService.yaml"
-        //             bat "kubectl get deployment"
-        //             bat "kubectl get service"
-
+        //             kubeDeploy(
+        //                 configs: 'k8scred', // Your Kubernetes configuration credentials
+        //                 kubeconfigContent: KUBE_CONFIG,
+        //                 manifests: [
+        //                     "${WORKSPACE}/deploymentService.yaml"
+                            
+        //                 ],
+        //                 enableConfigSubstitution: false
+        //             )
         //         }
         //     }
         // }
+
+        stage("Deploy to Kubernetes"){
+            steps{
+                script{
+                    // def kubeconfigPath = bat(script: 'echo %USERPROFILE%\\.kube\\config', returnStdout: true).trim()
+
+                    bat "kubectl --kubeconfig=KUBE_CONFIG apply -f ${WORKSPACE}\\deployment.yaml"
+                }
+            }
+        }
+
     }
 }

@@ -16,7 +16,7 @@ spec:
       - name: myapp-container
         image: lakshminarayanam/jenkins_auto_app:latest
         ports:
-        - containerPort: 8081
+        - containerPort: 8000
 
 ---
 
@@ -30,6 +30,6 @@ spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 8081  
-    targetPort: 8081
+    port: 8000 
+    targetPort: 8000
     nodePort: 31110
