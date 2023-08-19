@@ -48,15 +48,16 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
-                    def kubeConfigContent = KUBE_CONFIG.replace("\n", "\\n") // Escape newlines
-                    def kubeconfigPath = bat(script: 'echo %USERPROFILE%\\.kube\\config', returnStdout: true).trim()
+                    // def kubeConfigContent = KUBE_CONFIG.replace("\n", "\\n") // Escape newlines
+                    // def kubeconfigPath = bat(script: 'echo %USERPROFILE%\\.kube\\config', returnStdout: true).trim()
 
-                    bat """
-                    echo ${kubeConfigContent} > kubeconfig.tmp
-                    setx KUBECONFIG "${kubeconfigPath};%WORKSPACE%\\kubeconfig.tmp"
-                    kubectl apply -f ${WORKSPACE}\\deploymentService.yaml
-                    del kubeconfig.tmp
-                    """
+                    // bat """
+                    // echo ${kubeConfigContent} > kubeconfig.tmp
+                    // setx KUBECONFIG "${kubeconfigPath};%WORKSPACE%\\kubeconfig.tmp"
+                    // kubectl apply -f ${WORKSPACE}\\deploymentService.yaml
+                    // del kubeconfig.tmp
+                    // """
+                    bat "kubectl apply -f ${WORKSPACE}\\deploymentService.yaml"
                 }
             }
         }
